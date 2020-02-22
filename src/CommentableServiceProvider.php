@@ -17,9 +17,11 @@ use Illuminate\Support\ServiceProvider;
 
 class CommentableServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/comments.php', 'comments');
+    }
+
     public function boot()
     {
         $this->publishes([
@@ -29,13 +31,5 @@ class CommentableServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/commentable.php' => config_path('commentable.php'),
         ], 'config');
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/commentable.php', 'commentable');
     }
 }

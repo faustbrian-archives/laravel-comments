@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace KodeKeep\Commentable\Traits;
 
-use KodeKeep\Commentable\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Facades\Config;
+use KodeKeep\Commentable\Models\Comment;
 
 trait HasComments
 {
@@ -26,7 +27,7 @@ trait HasComments
      */
     public function commentableModel(): string
     {
-        return config('commentable.model');
+        return Config::get('commentable.model');
     }
 
     /**
@@ -54,7 +55,7 @@ trait HasComments
 
         $comment = (new $commentableModel())->createComment($this, $data, $creator);
 
-        if (!empty($parent)) {
+        if (! empty($parent)) {
             $parent->appendNode($comment);
         }
 
@@ -76,7 +77,7 @@ trait HasComments
 
         $comment = (new $commentableModel())->updateComment($id, $data);
 
-        if (!empty($parent)) {
+        if (! empty($parent)) {
             $parent->appendNode($comment);
         }
 
@@ -105,5 +106,10 @@ trait HasComments
     public function commentCount(): int
     {
         return $this->comments->count();
+    }
+
+    public function getTable(): string
+    {
+        return Config::get('comments.tables.comments');
     }
 }
