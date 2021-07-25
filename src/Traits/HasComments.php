@@ -5,18 +5,18 @@ declare(strict_types=1);
 /*
  * This file is part of Laravel Commentable.
  *
- * (c) KodeKeep <hello@kodekeep.com>
+ * (c) Konceiver <info@konceiver.dev>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace KodeKeep\Commentable\Traits;
+namespace Konceiver\Commentable\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Facades\Config;
-use KodeKeep\Commentable\Models\Comment;
+use Konceiver\Commentable\Models\Comment;
 
 trait HasComments
 {
